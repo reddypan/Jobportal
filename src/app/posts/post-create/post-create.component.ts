@@ -8,11 +8,17 @@ import { Post } from "../post.model";
 import { mimeType } from "./mime-type.validator";
 import { AuthService } from "../../auth/auth.service";
 
+export interface Types {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: "app-post-create",
   templateUrl: "./post-create.component.html",
   styleUrls: ["./post-create.component.css"]
 })
+
 export class PostCreateComponent implements OnInit, OnDestroy {
   enteredTitle = "";
   enteredContent = "";
@@ -23,6 +29,13 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   private mode = "create";
   private postId: string;
   private authStatusSub: Subscription;
+
+  events: Types[] = [
+    { value: 'Permanent', viewValue: 'Permanent' },
+    { value: 'Contract', viewValue: 'Contract' },
+    { value: 'Internship', viewValue: 'Internship' },
+    { value: 'Freelance', viewValue: 'Freelance' },
+  ];
 
   constructor(
     public postsService: PostsService,
@@ -42,12 +55,13 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       }),
       content: new FormControl(null, { validators: [Validators.required] }),
       image: new FormControl(null, {
-        validators: [Validators.required],
+
         asyncValidators: [mimeType]
       }),
       salary: new FormControl(null, {
         validators: [Validators.required]
       }),
+      type: new FormControl(null, { validators: [Validators.required] }),
       skills: new FormControl(null, {
         validators: [Validators.required]
       }),
