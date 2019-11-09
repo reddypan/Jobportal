@@ -6,7 +6,7 @@ import {
   MatSelectModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule,
   MatTableModule, MatRadioModule, MatTooltipModule, MatSnackBarModule,
   MatBottomSheetModule, MatCheckboxModule, MatPaginatorModule, MatSortModule, MatIconModule, MatTabsModule,
-  MatBadgeModule
+  MatBadgeModule, MatSidenavModule, MatSliderModule
 } from "@angular/material";
 
 @NgModule({
@@ -35,7 +35,9 @@ import {
     MatSortModule,
     MatIconModule,
     MatTabsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSidenavModule,
+    MatSliderModule
   ]
 })
 export class AngularMaterialModule {}

@@ -1,27 +1,25 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { ActivatedRoute, ParamMap } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenavContainer, MatDatepickerInputEvent, MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material';
+import { Post } from 'src/app/posts/post.model';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
-import { PostsService } from "../posts.service";
-import { Post } from "../post.model";
-import { mimeType } from "./mime-type.validator";
-import { AuthService } from "../../auth/auth.service";
-import { MatDatepickerInputEvent } from "@angular/material";
-import { Address } from "ngx-google-places-autocomplete/objects/address";
+import { Types } from 'src/app/posts/post-create/post-create.component';
+import { PostsService } from 'src/app/posts/posts.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
+import { mimeType } from 'src/app/posts/post-create/mime-type.validator';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
-export interface Types {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
-  selector: "app-post-create",
-  templateUrl: "./post-create.component.html",
-  styleUrls: ["./post-create.component.css"]
-})
+  selector: 'app-work-experience',
+  templateUrl: './work-experience.component.html',
+  styleUrls: ['./work-experience.component.css'],
 
-export class PostCreateComponent implements OnInit, OnDestroy {
+})
+export class WorkExperienceComponent {
+
   enteredTitle = "";
   enteredContent = "";
   post: Post;
@@ -72,6 +70,9 @@ export class PostCreateComponent implements OnInit, OnDestroy {
       type: new FormControl(null, { validators: [Validators.required] }),
       skills: new FormControl(null, {
         validators: [Validators.required]
+      }),
+      disabled: new FormControl(false, {
+        validators: []
       }),
       companyname: new FormControl(null, {
         validators: [Validators.required]

@@ -27,9 +27,17 @@ export class PostsService {
           return {
             posts: postData.posts.map(post => {
               return {
-                title: post.title,
-                content: post.content,
+                jobTitle: post.jobTitle,
                 id: post._id,
+                jobDescription: post.jobDescription,
+                salary: post.salary,
+                jobType: post.jobType,
+                requiredSkills: post.requiredSkills,
+                companyName: post.companyName,
+                companyDescription: post.companyDescription,
+                location: post.location,
+                createdOn: post.createdOn,
+                endsOn: post.endsOn,
                 imagePath: post.imagePath,
                 creator: post.creator
               };
@@ -54,50 +62,102 @@ export class PostsService {
   getPost(id: string) {
     return this.http.get<{
       _id: string;
-      title: string;
-      content: string;
+      jobTitle: string;
+      jobDescription: string;
+      salary: string;
+      jobType: string;
+      requiredSkills: string;
+      companyName: string;
+      companyDescription: string;
+      location: string;
+      createdOn: string;
+      endsOn: string;
       imagePath: string;
       creator: string;
     }>(BACKEND_URL + id);
   }
 
-  addPost(title: string, content: string, image: File) {
+  addPost(
+    jobTitle: string,
+    jobDescription: string,
+    salary: string,
+    jobType: string,
+    requiredSkills: string,
+    companyName: string,
+    imagePath: File,
+    companyDescription: string,
+    location: string,
+    createdOn: string,
+    endsOn: string
+  ) {
     const postData = new FormData();
-    postData.append("title", title);
-    postData.append("content", content);
-    postData.append("image", image, title);
+    postData.append("jobTitle", jobTitle);
+    postData.append("jobDescription", jobDescription);
+    postData.append("salary", salary);
+    postData.append("jobType", jobType);
+    postData.append("requiredSkills", requiredSkills);
+    postData.append("companyName", companyName);
+    postData.append("companyDescription", companyDescription);
+    postData.append("location", location);
+    postData.append("createdOn", createdOn);
+    postData.append("endsOn", endsOn);
+    postData.append("image", imagePath, jobTitle);
     this.http
-      .post<{ message: string; post: Post }>(
-        BACKEND_URL,
-        postData
-      )
+      .post<{ message: string; post: Post }>(BACKEND_URL, postData)
       .subscribe(responseData => {
         this.router.navigate(["/"]);
       });
   }
 
-  updatePost(id: string, title: string, content: string, image: File | string) {
+  updatePost(
+    id: string,
+    jobTitle: string,
+    jobDescription: string,
+    salary: string,
+    jobType: string,
+    requiredSkills: string,
+    companyName: string,
+    imagePath: File | string,
+    companyDescription: string,
+    location: string,
+    createdOn: string,
+    endsOn: string
+  ) {
     let postData: Post | FormData;
-    if (typeof image === "object") {
+    if (typeof imagePath === "object") {
       postData = new FormData();
       postData.append("id", id);
-      postData.append("title", title);
-      postData.append("content", content);
-      postData.append("image", image, title);
+      postData.append("jobTitle", jobTitle);
+      postData.append("jobDescription", jobDescription);
+      postData.append("salary", salary);
+      postData.append("jobType", jobType);
+      postData.append("requiredSkills", requiredSkills);
+      postData.append("companyName", companyName);
+      postData.append("companyDescription", companyDescription);
+      postData.append("location", location);
+      postData.append("createdOn", createdOn);
+      postData.append("endsOn", endsOn);
+      postData.append("image", imagePath, jobTitle);
     } else {
       postData = {
         id: id,
-        title: title,
-        content: content,
-        imagePath: image,
+        jobTitle: jobTitle,
+        jobDescription: jobDescription,
+        salary: salary,
+        jobType: jobType,
+        requiredSkills: requiredSkills,
+        companyName: companyName,
+        companyDescription: companyDescription,
+        location: location,
+        createdOn: createdOn,
+        endsOn: endsOn,
+        imagePath: imagePath,
         creator: null
       };
     }
-    this.http
-      .put(BACKEND_URL + id, postData)
-      .subscribe(response => {
-        this.router.navigate(["/"]);
-      });
+    this.http.put(BACKEND_URL + id, postData).subscribe(response => {
+      this.router.navigate(["/"]);
+    });
   }
 
   deletePost(postId: string) {

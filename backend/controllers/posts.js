@@ -3,8 +3,16 @@ const Post = require("../models/post");
 exports.createPost = (req, res, next) => {
   const url = req.protocol + "://" + req.get("host");
   const post = new Post({
-    title: req.body.title,
-    content: req.body.content,
+    jobTitle: req.body.jobTitle,
+    jobDescription: req.body.jobDescription,
+    salary: req.body.salary,
+    jobType: req.body.jobType,
+    requiredSkills: req.body.requiredSkills,
+    companyName: req.body.companyName,
+    companyDescription: req.body.companyDescription,
+    location: req.body.location,
+    createdOn: req.body.createdOn,
+    endsOn: req.body.endsOn,
     imagePath: url + "/images/" + req.file.filename,
     creator: req.userData.userId
   });
@@ -29,13 +37,21 @@ exports.createPost = (req, res, next) => {
 exports.updatePost = (req, res, next) => {
   let imagePath = req.body.imagePath;
   if (req.file) {
-    const url = req.protocol + "://" + req.get("host");
+    curl = req.protocol + "://" + req.get("host");
     imagePath = url + "/images/" + req.file.filename;
   }
   const post = new Post({
     _id: req.body.id,
-    title: req.body.title,
-    content: req.body.content,
+    jobTitle: req.body.jobTitle,
+    jobDescription: req.body.jobDescription,
+    salary: req.body.salary,
+    jobType: req.body.jobType,
+    requiredSkills: req.body.requiredSkills,
+    companyName: req.body.companyName,
+    companyDescription: req.body.companyDescription,
+    location: req.body.location,
+    createdOn: req.body.createdOn,
+    endsOn: req.body.endsOn,
     imagePath: imagePath,
     creator: req.userData.userId
   });

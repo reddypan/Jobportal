@@ -12,13 +12,6 @@ import { ErrorComponent } from "./error/error.component";
 import { AngularMaterialModule } from "./angular-material.module";
 import { PostsModule } from "./posts/posts.module";
 
-import { MatInputModule, MatCardModule, MatButtonModule,
-  MatToolbarModule, MatExpansionModule, MatDividerModule,
-  MatListModule, MatProgressSpinnerModule, MatDialogModule, MatFormFieldModule,
-  MatSelectModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule,
-  MatTableModule, MatRadioModule, MatTooltipModule, MatSnackBarModule,
-  MatBottomSheetModule, MatCheckboxModule, MatPaginatorModule, MatSortModule, MatIconModule, MatTabsModule,
-  MatBadgeModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -33,19 +26,6 @@ import { MatInputModule, MatCardModule, MatButtonModule,
     HttpClientModule,
     AngularMaterialModule,
     PostsModule,
-    MatInputModule,
-    MatCardModule,
-    MatButtonModule,
-  MatToolbarModule,
-   MatExpansionModule,
-   MatDividerModule,
-  MatListModule,
-  MatProgressSpinnerModule,
-  MatDialogModule, MatFormFieldModule,
-  MatSelectModule, MatAutocompleteModule, MatDatepickerModule, MatNativeDateModule,
-  MatTableModule, MatRadioModule, MatTooltipModule, MatSnackBarModule,
-  MatBottomSheetModule, MatCheckboxModule, MatPaginatorModule, MatSortModule, MatIconModule, MatTabsModule,
-  MatBadgeModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
