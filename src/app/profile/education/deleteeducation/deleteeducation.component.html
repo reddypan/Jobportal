@@ -1,0 +1,59 @@
+<mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <h1 class="info-text mat-headline">Confirm deletion</h1>
+    <form [formGroup]="form" *ngIf="!isLoading">
+
+      <mat-form-field>
+        <input matInput type="text" formControlName="degree" placeholder="Degree" [disabled]>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" formControlName="schoolname" placeholder="School Name" disabled = "true">
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          ngx-google-places-autocomplete
+          formControlName="location"
+          placeholder="Location"
+          disabled
+        />
+        <mat-error *ngIf="form.get('location').invalid">Please enter valid location.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput type="text" formControlName="fieldofstudy" placeholder="Field of Study" disabled>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" formControlName="grades" placeholder="Grades" disabled>
+          </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Start Date"
+          [formControlName]="'startdate'"
+          [disabled]= "true"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <!-- <mat-checkbox formControlName = "disabled">I am currently studying here.</mat-checkbox> -->
+      <mat-form-field>
+          <input
+            matInput
+            [matDatepicker]="pickerEnd"
+            placeholder="End Date"
+            [formControlName]="'enddate'"
+            [disabled] = "true"
+          />
+          <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+        </mat-form-field>
+      <mat-form-field>
+          <textarea matInput rows="4" formControlName="description" placeholder="Description" disabled></textarea>
+        </mat-form-field>
+      <button mat-raised-button color="warn" type="button" (click)= "onDelete()">DELETE</button> &nbsp; &nbsp;
+      <button mat-raised-button color="primary" type="submit" [routerLink]="['/profile']" routerLinkActive="router-link-active" >CANCEL</button>
+    </form>
+  </mat-card>
+
+

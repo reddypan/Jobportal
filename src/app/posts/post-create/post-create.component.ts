@@ -211,7 +211,6 @@ export class PostCreateComponent implements OnInit, OnDestroy {
           '/' +
           `${event.value.getFullYear()}`
       );
-
   }
 
   public handleAddressChange(address: Address) {

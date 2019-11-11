@@ -1,28 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenavContainer, MatDatepickerInputEvent, MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material';
-import { Post } from 'src/app/posts/post.model';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
-import { Types } from 'src/app/posts/post-create/post-create.component';
 import { PostsService } from 'src/app/posts/posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { mimeType } from 'src/app/posts/post-create/mime-type.validator';
-import { Address } from 'ngx-google-places-autocomplete/objects/address';
-
 
 @Component({
-  selector: 'app-work-experience',
-  templateUrl: './work-experience.component.html',
-  styleUrls: ['./work-experience.component.css'],
-
+  selector: 'app-deleteworkexperience',
+  templateUrl: './deleteworkexperience.component.html',
+  styleUrls: ['./deleteworkexperience.component.css']
 })
-export class WorkExperienceComponent {
-
-  enteredTitle = "";
-  enteredContent = "";
-  post: Post;
+export class DeleteworkexperienceComponent implements OnInit {
   isLoading = false;
   form: FormGroup;
   imagePreview: string;
@@ -35,7 +23,6 @@ export class WorkExperienceComponent {
   newDate;
   myDate;
   todayDate;
-  placesRef: GooglePlaceDirective;
   formattedAddress: string;
   newlyUpdatedStartDate: string;
   newlyUpdatedEndDate: string;
@@ -77,9 +64,9 @@ export class WorkExperienceComponent {
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       console.log(paramMap);
-      if (paramMap.has("workId")) {
+      if (paramMap.has("experienceId")) {
         this.mode = "edit";
-        this.experienceId = paramMap.get("workId");
+        this.experienceId = paramMap.get("experienceId");
         this.authService
           .getWorkExperience(this.userId, this.experienceId)
           .subscribe(contactData => {
@@ -113,6 +100,12 @@ export class WorkExperienceComponent {
               disabled: false,
               city: this.experience.location,
             });
+            this.form.get('title').disable();
+            this.form.get('content').disable();
+            this.form.get('startdate').disable();
+            this.form.get('enddate').disable();
+            this.form.get('city').disable();
+            this.form.get('companyname').disable();
           });
       } else {
         this.mode = "create";
@@ -121,77 +114,12 @@ export class WorkExperienceComponent {
     });
   }
 
-  onSaveWorkExperience() {
-    if (this.form.invalid) {
-      return;
-    }
-    if (this.newDate == null) {
-      this.newlyUpdatedStartDate = this.experience.startdate;
-    } else {
-      this.newlyUpdatedStartDate = this.newDate;
-    }
-    if (this.myDate == null) {
-      this.newlyUpdatedEndDate = this.experience.enddate;
-    } else {
-      this.newlyUpdatedEndDate = this.myDate;
-    }
-    if (this.mode === 'create') {
-    this.authService.addWorkExperience(
-      this.userId,
-      this.form.value.title,
-      this.form.value.companyname,
-      this.form.value.city,
-      this.newlyUpdatedStartDate,
-      this.newlyUpdatedEndDate,
-      this.form.value.content,
-    );
-    } else {
-      this.authService.updateWorkExperience(
-        this.userId,
-        this.experienceId,
-        this.form.value.title,
-        this.form.value.companyname,
-        this.form.value.city,
-        this.newlyUpdatedStartDate,
-        this.newlyUpdatedEndDate,
-        this.form.value.content,
-      );
-    }
-  }
-
   ngOnDestroy() {
     this.authStatusSub.unsubscribe();
   }
 
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    const date = `${event.value}`;
-    this.newDate = date
-      .slice(0, date.indexOf('00:00:00') - 1).slice(date.indexOf(" ") + 1).concat(
-        ', ' +
-          `${event.value.getMonth() + 1}` +
-          '/' +
-          `${event.value.getDate()}` +
-          '/' +
-          `${event.value.getFullYear()}`
-      );
-  }
-
-  addEndDate(type: string, event: MatDatepickerInputEvent<Date>) {
-    const date = `${event.value}`;
-    this.myDate = date
-      .slice(0, date.indexOf('00:00:00') - 1).slice(date.indexOf(" ") + 1 ).concat(
-        ', ' +
-          `${event.value.getMonth() + 1}` +
-          '/' +
-          `${event.value.getDate()}` +
-          '/' +
-          `${event.value.getFullYear()}`
-      );
-
-  }
-
-  public handleAddressChange(address: Address) {
-    this.formattedAddress = address.formatted_address;
+  onDelete() {
+    this.authService.deleteExperience(this.userId, this.experienceId);
   }
 
 }

@@ -1,0 +1,104 @@
+<ng-container>
+    <mat-sidenav-container class="example-container">
+      <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="example-sidenav">
+        <mat-card class="example-card">
+          <img
+            mat-card-image
+            class="matimage"
+            [src]= "post?.imagePath"
+            alt="Photo of a Shiba Inu"
+          />
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item
+                ><mat-icon>home_work</mat-icon
+                ><span>&nbsp;&nbsp; {{post?.jobTitle}} </span>
+              </mat-list-item>
+              <mat-list-item
+                ><mat-icon>home</mat-icon> &nbsp;&nbsp; {{post?.location}}</mat-list-item
+              >
+              <mat-list-item
+                ><mat-icon>monetization_on</mat-icon>
+                &nbsp;&nbsp;{{post?.salary}}/hr.</mat-list-item
+              >
+              <mat-list-item
+                ><mat-icon>assignment</mat-icon> &nbsp;&nbsp;{{post?.jobType}}
+                  </mat-list-item
+              >
+              <mat-divider></mat-divider>
+              <mat-list-item class="smallheaderFont"
+                ><mat-icon>calender_today</mat-icon
+                ><span>&nbsp;&nbsp;<b>Ends On</b></span>
+              </mat-list-item>
+              <span class="paragraph"
+                > &nbsp;&nbsp;&nbsp;{{post?.endsOn}}<br /></span
+              ><br />
+              <mat-divider></mat-divider>
+              <mat-list-item class="smallheaderFont"
+                ><mat-icon>star</mat-icon><span>&nbsp;&nbsp;<b>Skills</b></span>
+              </mat-list-item>
+              <mat-list-item
+                >{{post?.requiredSkills}}</mat-list-item>
+              <mat-divider></mat-divider>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </mat-sidenav>
+      <mat-sidenav-content>
+          <div class = "column">
+        <mat-card class="example-card">
+          <mat-icon *ngIf="opened" (click)="sidenav.toggle()">menu_open</mat-icon>
+          <!-- <button mat-raised-button color="primary" *ngIf="opened" (click)="sidenav.toggle()">
+            Close Side Navigation
+          </button> -->
+          <mat-icon *ngIf="!opened" (click)="sidenav.toggle()">double_arrow</mat-icon>
+          <!-- <button mat-raised-button color="primary" *ngIf="!opened" (click)="sidenav.toggle()">
+              Open Side Navigation
+            </button> -->
+            <button mat-raised-button color="primary" type="button" class="applybutton" >Apply Now</button>
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item class="headerFont"
+                ><mat-icon>business_center</mat-icon
+                ><span>&nbsp;&nbsp;<b> {{post?.companyName}} </b></span>
+
+              </mat-list-item>
+              <mat-divider></mat-divider>
+                <mat-list-item class="smallheaderFont"
+                  ><mat-icon>description</mat-icon><span>&nbsp;&nbsp;<b
+                    > Company Description
+                  </b> </span>
+                </mat-list-item
+                >
+                <mat-list-item class = "para"
+                  >{{post?.companyDescription}}
+
+                </mat-list-item>
+                <mat-list-item></mat-list-item>
+                <mat-divider></mat-divider>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="example-card">
+            <mat-card-content>
+              <mat-list>
+                <mat-list-item class="headerFont"
+                  ><mat-icon>work</mat-icon
+                  ><span>&nbsp;&nbsp;<b> Job Description</b></span>
+
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                  <mat-list-item class="para"
+                    ><span> &nbsp;&nbsp; {{post?.jobDescription}}
+                      </span></mat-list-item
+                  >
+                  <mat-list-item></mat-list-item>
+              </mat-list>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </ng-container>
+

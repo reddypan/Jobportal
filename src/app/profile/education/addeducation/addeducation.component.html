@@ -1,1 +1,64 @@
-<p>addeducation works!</p>
+<mat-card>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form [formGroup]="form" (submit)="onSaveEducation()" *ngIf="!isLoading">
+      <mat-form-field>
+        <input matInput type="text" formControlName="degree" placeholder="Degree">
+        <mat-error *ngIf="form.get('degree').invalid">Please enter a valid degree.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" formControlName="schoolname" placeholder="School Name">
+        <mat-error *ngIf="form.get('schoolname').invalid">Please enter valid school name.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          ngx-google-places-autocomplete
+          (onAddressChange)="handleAddressChange($event)"
+          formControlName="location"
+          placeholder="Location"
+        />
+        <mat-error *ngIf="form.get('location').invalid">Please enter valid location.</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput type="text" formControlName="fieldofstudy" placeholder="Field of Study">
+          <mat-error *ngIf="form.get('fieldofstudy').invalid">Please enter valid field of study.</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" formControlName="grades" placeholder="Grades">
+            <mat-error *ngIf="form.get('grades').invalid">Please enter valid grades.</mat-error>
+          </mat-form-field>
+      <mat-form-field>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Start Date"
+          (dateInput)="addEvent('input', $event)"
+          (dateChange)="addEvent('change', $event)"
+          [formControlName]="'startdate'"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-checkbox formControlName = "disabled">I am currently studying here.</mat-checkbox>
+      <mat-form-field>
+          <input
+            matInput
+            [matDatepicker]="pickerEnd"
+            placeholder="End Date"
+            (dateInput)="addEndDate('input', $event)"
+            (dateChange)="addEndDate('change', $event)"
+            [formControlName]="'enddate'"
+            [disabled] = "form.disabled"
+          />
+          <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+          <mat-datepicker #pickerEnd></mat-datepicker>
+        </mat-form-field>
+      <mat-form-field>
+          <textarea matInput rows="4" formControlName="description" placeholder="Job Description"></textarea>
+          <mat-error *ngIf="form.get('description').invalid">Please enter valid description.</mat-error>
+        </mat-form-field>
+      <button mat-raised-button color="accent" type="submit">Add</button>
+    </form>
+  </mat-card>
+

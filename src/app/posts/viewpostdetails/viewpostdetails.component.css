@@ -94,3 +94,7 @@ ul {
 .deletebutton {
   color: red;
 }
+
+.applybutton {
+  margin-left: 300px;
+}

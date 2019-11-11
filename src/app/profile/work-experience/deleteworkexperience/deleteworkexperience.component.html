@@ -1,55 +1,50 @@
 <mat-card>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <form [formGroup]="form" (submit)="onSaveWorkExperience()" *ngIf="!isLoading">
+    <h1 class="info-text mat-headline">Confirm deletion</h1>
+    <form [formGroup]="form" *ngIf="!isLoading">
       <mat-form-field>
         <input matInput type="text" formControlName="title" placeholder="Job Title">
-        <mat-error *ngIf="form.get('title').invalid">Please enter a valid job title.</mat-error>
+
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" formControlName="companyname" placeholder="Company Name">
-        <mat-error *ngIf="form.get('companyname').invalid">Please enter valid company name.</mat-error>
       </mat-form-field>
-
       <mat-form-field>
         <input
           matInput
           ngx-google-places-autocomplete
-          (onAddressChange)="handleAddressChange($event)"
+
           formControlName="city"
           placeholder="Location"
         />
-        <mat-error *ngIf="form.get('city').invalid">Please enter valid city.</mat-error>
+
       </mat-form-field>
       <mat-form-field>
         <input
           matInput
           [matDatepicker]="picker"
           placeholder="Start Date"
-          (dateInput)="addEvent('input', $event)"
-          (dateChange)="addEvent('change', $event)"
           [formControlName]="'startdate'"
         />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <mat-checkbox formControlName = "disabled">I am currently working in this role</mat-checkbox>
       <mat-form-field>
           <input
             matInput
             [matDatepicker]="pickerEnd"
             placeholder="End Date"
-            (dateInput)="addEndDate('input', $event)"
-            (dateChange)="addEndDate('change', $event)"
             [formControlName]="'enddate'"
-            [disabled] = "form.disabled"
+
           />
           <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
           <mat-datepicker #pickerEnd></mat-datepicker>
         </mat-form-field>
       <mat-form-field>
           <textarea matInput rows="4" formControlName="content" placeholder="Job Description"></textarea>
-          <mat-error *ngIf="form.get('content').invalid">Please enter valid job description.</mat-error>
         </mat-form-field>
-      <button mat-raised-button color="accent" type="submit">Add</button>
+        <button mat-raised-button color="warn" type="button" (click)= "onDelete()">DELETE</button> &nbsp; &nbsp;
+        <button mat-raised-button color="primary" type="submit" [routerLink]="['/profile']" routerLinkActive="router-link-active" >CANCEL</button>
     </form>
   </mat-card>
+

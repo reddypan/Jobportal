@@ -1,26 +1,18 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenavContainer, MatDatepickerInputEvent, MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material';
-import { Post } from 'src/app/posts/post.model';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
-import { Types } from 'src/app/posts/post-create/post-create.component';
 import { PostsService } from 'src/app/posts/posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { mimeType } from 'src/app/posts/post-create/mime-type.validator';
-import { Address } from 'ngx-google-places-autocomplete/objects/address';
 
 @Component({
-  selector: 'app-addeducation',
-  templateUrl: './addeducation.component.html',
-  styleUrls: ['./addeducation.component.css']
+  selector: 'app-deleteeducation',
+  templateUrl: './deleteeducation.component.html',
+  styleUrls: ['./deleteeducation.component.css']
 })
-export class AddeducationComponent implements OnInit {
+export class DeleteeducationComponent implements OnInit {
 
-  enteredTitle = "";
-  enteredContent = "";
-  post: Post;
   isLoading = false;
   form: FormGroup;
   imagePreview: string;
@@ -37,7 +29,6 @@ export class AddeducationComponent implements OnInit {
   formattedAddress: string;
   newlyUpdatedStartDate: string;
   newlyUpdatedEndDate: string;
-
 
   constructor(
     public postsService: PostsService,
@@ -117,6 +108,14 @@ export class AddeducationComponent implements OnInit {
               fieldofstudy: this.experience.fieldofstudy,
               grades: this.experience.grades
             });
+            this.form.get('degree').disable();
+            this.form.get('description').disable();
+            this.form.get('startdate').disable();
+            this.form.get('enddate').disable();
+            this.form.get('location').disable();
+            this.form.get('schoolname').disable();
+            this.form.get('fieldofstudy').disable();
+            this.form.get('grades').disable();
           });
       } else {
         this.mode = "create";
@@ -125,81 +124,8 @@ export class AddeducationComponent implements OnInit {
     });
   }
 
-
-  onSaveEducation() {
-    if (this.form.invalid) {
-      return;
-    }
-    if (this.newDate == null) {
-      this.newlyUpdatedStartDate = this.experience.startdate;
-    } else {
-      this.newlyUpdatedStartDate = this.newDate;
-    }
-    if (this.myDate == null) {
-      this.newlyUpdatedEndDate = this.experience.enddate;
-    } else {
-      this.newlyUpdatedEndDate = this.myDate;
-    }
-    if (this.mode === 'create') {
-    this.authService.addEducation(
-      this.userId,
-      this.form.value.degree,
-      this.form.value.schoolname,
-      this.form.value.location,
-      this.form.value.fieldofstudy,
-      this.form.value.grades,
-      this.newlyUpdatedStartDate,
-      this.newlyUpdatedEndDate,
-      this.form.value.description,
-    );
-    } else {
-      this.authService.updateEducation(
-        this.userId,
-        this.educationId,
-        this.form.value.degree,
-        this.form.value.schoolname,
-        this.form.value.location,
-        this.form.value.fieldofstudy,
-        this.form.value.grades,
-        this.newlyUpdatedStartDate,
-        this.newlyUpdatedEndDate,
-        this.form.value.description,
-      );
-    }
-  }
-
-  ngOnDestroy() {
-    this.authStatusSub.unsubscribe();
-  }
-
-  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
-    const date = `${event.value}`;
-    this.newDate = date
-      .slice(0, date.indexOf('00:00:00') - 1).slice(date.indexOf(" ") + 1).concat(
-        ', ' +
-          `${event.value.getMonth() + 1}` +
-          '/' +
-          `${event.value.getDate()}` +
-          '/' +
-          `${event.value.getFullYear()}`
-      );
-  }
-
-  addEndDate(type: string, event: MatDatepickerInputEvent<Date>) {
-    const date = `${event.value}`;
-    this.myDate = date
-      .slice(0, date.indexOf('00:00:00') - 1).slice(date.indexOf(" ") + 1 ).concat(
-        ', ' +
-          `${event.value.getMonth() + 1}` +
-          '/' +
-          `${event.value.getDate()}` +
-          '/' +
-          `${event.value.getFullYear()}`
-      );
-  }
-
-  public handleAddressChange(address: Address) {
-    this.formattedAddress = address.formatted_address;
+  onDelete() {
+    this.authService.deleteEducation(this.userId, this.educationId);
   }
 
 }
