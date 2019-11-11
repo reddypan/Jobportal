@@ -12,7 +12,8 @@ const postSchema = mongoose.Schema({
   location: { type: String, required: true },
   createdOn: { type: String, required: true },
   endsOn: { type: String, required: true },
-  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  appliedpeople: { type: [mongoose.Schema.Types.ObjectId], ref: "User", required: true}
 });
 
 module.exports = mongoose.model("Post", postSchema);

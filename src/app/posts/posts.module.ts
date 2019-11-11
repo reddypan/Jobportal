@@ -12,9 +12,10 @@ import { WorkExperienceComponent } from '../profile/work-experience/work-experie
 import { DeleteeducationComponent } from '../profile/education/deleteeducation/deleteeducation.component';
 import { DeleteworkexperienceComponent } from '../profile/work-experience/deleteworkexperience/deleteworkexperience.component';
 import { ViewpostdetailsComponent } from './viewpostdetails/viewpostdetails.component';
+import { ApplyjobComponent } from './applyjob/applyjob.component';
 
 @NgModule({
-  declarations: [PostCreateComponent, PostListComponent, UserProfileComponent, AddeducationComponent, WorkExperienceComponent, DeleteeducationComponent, DeleteworkexperienceComponent, ViewpostdetailsComponent],
+  declarations: [PostCreateComponent, PostListComponent, UserProfileComponent, AddeducationComponent, WorkExperienceComponent, DeleteeducationComponent, DeleteworkexperienceComponent, ViewpostdetailsComponent, ApplyjobComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

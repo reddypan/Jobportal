@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { PostsService } from 'src/app/posts/posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-deleteworkexperience',
@@ -31,7 +32,8 @@ export class DeleteworkexperienceComponent implements OnInit {
   constructor(
     public postsService: PostsService,
     public route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -120,6 +122,12 @@ export class DeleteworkexperienceComponent implements OnInit {
 
   onDelete() {
     this.authService.deleteExperience(this.userId, this.experienceId);
+    this.openSnackBar();
   }
 
+  openSnackBar() {
+    this.snackBar.open("Profile updated successfully!!", 'Dismiss', {
+      duration: 2000
+    });
+  }
 }

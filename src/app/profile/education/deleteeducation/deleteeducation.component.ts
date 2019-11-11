@@ -5,6 +5,7 @@ import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { PostsService } from 'src/app/posts/posts.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-deleteeducation',
@@ -33,7 +34,8 @@ export class DeleteeducationComponent implements OnInit {
   constructor(
     public postsService: PostsService,
     public route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -126,6 +128,14 @@ export class DeleteeducationComponent implements OnInit {
 
   onDelete() {
     this.authService.deleteEducation(this.userId, this.educationId);
+    this.openSnackBar();
+  }
+
+  openSnackBar() {
+    //this.onSaveforLaterUse();
+    this.snackBar.open("Profile updated successfully!!", 'Dismiss', {
+      duration: 2000
+    });
   }
 
 }

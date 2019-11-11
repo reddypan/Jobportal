@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenavContainer, MatDatepickerInputEvent, MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material';
+import { MatSidenavContainer, MatDatepickerInputEvent, MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter, MatSnackBar } from '@angular/material';
 import { Post } from 'src/app/posts/post.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -42,7 +42,8 @@ export class AddeducationComponent implements OnInit {
   constructor(
     public postsService: PostsService,
     public route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -166,6 +167,7 @@ export class AddeducationComponent implements OnInit {
         this.form.value.description,
       );
     }
+    this.openSnackBar();
   }
 
   ngOnDestroy() {
@@ -200,6 +202,12 @@ export class AddeducationComponent implements OnInit {
 
   public handleAddressChange(address: Address) {
     this.formattedAddress = address.formatted_address;
+  }
+
+  openSnackBar() {
+    this.snackBar.open("Profile updated successfully!!", 'Dismiss', {
+      duration: 2000
+    });
   }
 
 }

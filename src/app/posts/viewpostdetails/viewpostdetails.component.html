@@ -55,7 +55,7 @@
           <!-- <button mat-raised-button color="primary" *ngIf="!opened" (click)="sidenav.toggle()">
               Open Side Navigation
             </button> -->
-            <button mat-raised-button color="primary" type="button" class="applybutton" >Apply Now</button>
+            <button mat-raised-button color="primary" type="button" class="applybutton" [routerLink]="['/applyjob', post?.id]" routerLinkActive="router-link-active" >Apply Now</button>
           <mat-card-content>
             <mat-list>
               <mat-list-item class="headerFont"

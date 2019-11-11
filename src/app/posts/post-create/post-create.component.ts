@@ -7,7 +7,7 @@ import { PostsService } from "../posts.service";
 import { Post } from "../post.model";
 import { mimeType } from "./mime-type.validator";
 import { AuthService } from "../../auth/auth.service";
-import { MatDatepickerInputEvent } from "@angular/material";
+import { MatDatepickerInputEvent, MatSnackBar } from "@angular/material";
 import { Address } from "ngx-google-places-autocomplete/objects/address";
 
 export interface Types {
@@ -48,7 +48,8 @@ export class PostCreateComponent implements OnInit, OnDestroy {
   constructor(
     public postsService: PostsService,
     public route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -176,6 +177,7 @@ export class PostCreateComponent implements OnInit, OnDestroy {
         this.todayDate,
         this.myDate
       );
+      this.openSnackBar("Job created successfully!!");
     } else {
       this.postsService.updatePost(
         this.postId,
@@ -191,7 +193,9 @@ export class PostCreateComponent implements OnInit, OnDestroy {
         this.todayDate,
         this.myDate
       );
+      this.openSnackBar("Job updated successfully!!");
     }
+
     this.form.reset();
   }
 
@@ -215,6 +219,17 @@ export class PostCreateComponent implements OnInit, OnDestroy {
 
   public handleAddressChange(address: Address) {
     this.formattedAddress = address.formatted_address;
+  }
+
+  openSnackBar(message: string) {
+    if (this.form.invalid) {
+      return;
+    } else {
+      //this.onSaveforLaterUse();
+      this.snackBar.open(message, 'Dismiss', {
+        duration: 2000
+      });
+    }
   }
 
 }

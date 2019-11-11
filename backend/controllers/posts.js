@@ -14,7 +14,8 @@ exports.createPost = (req, res, next) => {
     createdOn: req.body.createdOn,
     endsOn: req.body.endsOn,
     imagePath: url + "/images/" + req.file.filename,
-    creator: req.userData.userId
+    creator: req.userData.userId,
+    appliedpeople: []
   });
   post
     .save()
@@ -126,6 +127,30 @@ exports.deletePost = (req, res, next) => {
     .catch(error => {
       res.status(500).json({
         message: "Deleting posts failed!"
+      });
+    });
+};
+
+exports.addApplication = (req, res, next) => {
+  console.log(req.params.id)
+  Post.findById( req.params.id)
+    .then(result => {
+      result.appliedpeople.push(req.body.userId);
+
+      Post.updateOne({
+        _id: req.params.id
+      }, {
+        $set: { "appliedpeople": result.appliedpeople }
+      }).then(result => {
+        res.status(201).json({
+          title: "User activated.",
+          message: 'You can now login with the username and password.'
+        });
+      })
+    })
+    .catch(error => {
+      res.status(500).json({
+        message: "Couldn't udpate post!"
       });
     });
 };

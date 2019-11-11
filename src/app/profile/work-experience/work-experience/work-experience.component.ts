@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenavContainer, MatDatepickerInputEvent, MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter } from '@angular/material';
+import { MatSidenavContainer, MatDatepickerInputEvent, MAT_DATE_FORMATS, MAT_DATE_LOCALE, DateAdapter, MatSnackBar } from '@angular/material';
 import { Post } from 'src/app/posts/post.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -44,7 +44,8 @@ export class WorkExperienceComponent {
   constructor(
     public postsService: PostsService,
     public route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit() {
@@ -157,6 +158,7 @@ export class WorkExperienceComponent {
         this.form.value.content,
       );
     }
+    this.openSnackBar();
   }
 
   ngOnDestroy() {
@@ -194,4 +196,9 @@ export class WorkExperienceComponent {
     this.formattedAddress = address.formatted_address;
   }
 
+  openSnackBar() {
+    this.snackBar.open("Profile updated successfully!!", 'Dismiss', {
+      duration: 2000
+    });
+  }
 }

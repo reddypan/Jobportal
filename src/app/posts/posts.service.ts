@@ -163,4 +163,13 @@ export class PostsService {
   deletePost(postId: string) {
     return this.http.delete(BACKEND_URL + postId);
   }
+
+  addApplication(jobId: string, userId: string){
+    const postData = new FormData();
+    postData.append("userId", userId);
+    this.http.put(BACKEND_URL + "apply/" + jobId, postData).subscribe(response => {
+      this.router.navigate(["/"]);
+
+    });
+  }
 }

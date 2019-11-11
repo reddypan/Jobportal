@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { PageEvent, MatSidenavContainer } from '@angular/material';
 import { Post } from '../post.model';
 import { PostsService } from '../posts.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -24,8 +24,9 @@ export class ViewpostdetailsComponent implements OnInit {
   userId: string;
   private postsSub: Subscription;
   private authStatusSub: Subscription;
-  opened: boolean = false;
+  opened: boolean = true;
 
+  @ViewChild(MatSidenavContainer) sidenavContainer: MatSidenavContainer;
   constructor(
     public postsService: PostsService,
     private authService: AuthService,
@@ -66,12 +67,6 @@ export class ViewpostdetailsComponent implements OnInit {
           });
         }
       });
-  }
-
-
-  ngOnDestroy() {
-    this.postsSub.unsubscribe();
-    this.authStatusSub.unsubscribe();
   }
 
 }

@@ -17,11 +17,11 @@
     </mat-action-row>
     <mat-action-row *ngIf="userIsAuthenticated && userId !== post.creator">
         <a mat-button color="primary" [routerLink]="['/viewjobdetails', post.id]">View more</a>
-        <button mat-button color="warn" (click)="onDelete(post.id)">Apply now</button>
+        <button mat-button color="warn" [routerLink]="['/applyjob', post.id]">Apply now</button>
       </mat-action-row>
       <mat-action-row *ngIf="!userIsAuthenticated">
           <a mat-button color="primary" [routerLink]="['/auth/login']">View more</a>
-          <button mat-button color="warn" (click)="onDelete(post.id)">Apply now</button>
+          <button mat-button color="warn" [routerLink]="['/auth/login']">Apply now</button>
         </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>

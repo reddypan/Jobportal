@@ -9,6 +9,7 @@ import { AddeducationComponent } from "./profile/education/addeducation/addeduca
 import { DeleteeducationComponent } from "./profile/education/deleteeducation/deleteeducation.component";
 import { DeleteworkexperienceComponent } from "./profile/work-experience/deleteworkexperience/deleteworkexperience.component";
 import { ViewpostdetailsComponent } from "./posts/viewpostdetails/viewpostdetails.component";
+import { ApplyjobComponent } from "./posts/applyjob/applyjob.component";
 
 const routes: Routes = [
   { path: "", component: PostListComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: "editeducation/:educationId", component: AddeducationComponent, canActivate: [AuthGuard] },
   { path: "deleteeducation/:educationId", component: DeleteeducationComponent, canActivate: [AuthGuard] },
   { path: "deleteworkexperience/:experienceId", component: DeleteworkexperienceComponent, canActivate: [AuthGuard] },
+  { path: "applyjob/:jobId", component: ApplyjobComponent, canActivate: [AuthGuard] },
   { path: "viewjobdetails/:jobId", component: ViewpostdetailsComponent, canActivate: [AuthGuard] },
   { path: "addeducation", component: AddeducationComponent, canActivate: [AuthGuard] },
   { path: "auth", loadChildren: "./auth/auth.module#AuthModule"}
