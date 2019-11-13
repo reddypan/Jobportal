@@ -12,6 +12,7 @@
     </mat-expansion-panel-header>
     <p>{{ post.jobDescription }}</p>
     <mat-action-row *ngIf="userIsAuthenticated && userId === post.creator">
+        <button mat-button color="accent" [routerLink]="['/viewapplicants', post.id]" routerLinkActive="router-link-active" >View applications</button>
       <a mat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
       <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
     </mat-action-row>

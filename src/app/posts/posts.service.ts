@@ -74,6 +74,7 @@ export class PostsService {
       endsOn: string;
       imagePath: string;
       creator: string;
+      appliedpeople: string;
     }>(BACKEND_URL + id);
   }
 
