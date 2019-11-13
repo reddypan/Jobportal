@@ -1,0 +1,172 @@
+<ng-container>
+    <mat-sidenav-container class="example-container">
+      <mat-sidenav #sidenav mode="side" [(opened)]="opened" class="example-sidenav">
+        <mat-card class="example-card">
+          <img
+            mat-card-image
+            class="matimage"
+            src="https://i2.wp.com/www.dunphys.co.uk/wp-content/uploads/2018/05/Blank-profile.png?ssl=1"
+            alt="Photo of a Shiba Inu"
+          />
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item
+                ><mat-icon>desktop_mac</mat-icon
+                ><span>&nbsp;&nbsp;{{(user?.role)? user?.role:"No role added" }} &nbsp;&nbsp;&nbsp;</span>
+              </mat-list-item>
+              <mat-list-item
+                ><mat-icon>home</mat-icon> &nbsp;&nbsp;{{(user?.location)? user?.location:"No location added" }} &nbsp;&nbsp;&nbsp;</mat-list-item
+              >
+              <mat-list-item
+                ><mat-icon>email</mat-icon>
+                &nbsp;&nbsp;{{user?.email}}</mat-list-item
+              >
+              <mat-list-item
+                ><mat-icon>phone</mat-icon> &nbsp;&nbsp;{{(user?.phone)? user?.phone:"No phone added" }} &nbsp;&nbsp;&nbsp;
+                  </mat-list-item
+              >
+              <mat-divider></mat-divider>
+              <mat-list-item class="smallheaderFont"
+                ><mat-icon>perm_contact_calender</mat-icon
+                ><span>&nbsp;&nbsp;<b>About Me</b></span>
+              </mat-list-item>
+              <span class="paragraph"
+                >{{(user?.about)? user?.about:"You have not added any details about you" }} &nbsp;&nbsp;&nbsp;<br /></span
+              ><br />
+              <mat-divider></mat-divider>
+              <mat-list-item class="smallheaderFont"
+                ><mat-icon>star</mat-icon><span>&nbsp;&nbsp;<b>Skills</b></span>
+              </mat-list-item>
+              <mat-list-item
+                >HTML & CSS<mat-slider
+                  thumbLabel
+                  [displayWith]="formatLabel"
+                  tickInterval="5"
+                  min="1"
+                  max="100"
+                ></mat-slider
+              ></mat-list-item>
+              <mat-list-item
+                >Javascript<mat-slider
+                  thumbLabel
+                  [displayWith]="formatLabel"
+                  tickInterval="5"
+                  min="1"
+                  max="100"
+                ></mat-slider
+              ></mat-list-item>
+              <mat-list-item
+                >Java<mat-slider
+                  thumbLabel
+                  [displayWith]="formatLabel"
+                  tickInterval="5"
+                  min="1"
+                  max="100"
+                ></mat-slider
+              ></mat-list-item>
+              <mat-list-item
+                >Angular JS<mat-slider
+                  thumbLabel
+                  [displayWith]="formatLabel"
+                  tickInterval="5"
+                  min="1"
+                  max="100"
+                ></mat-slider
+              ></mat-list-item>
+              <mat-list-item
+                >React JS<mat-slider
+                  thumbLabel
+                  [displayWith]="formatLabel"
+                  tickInterval="5"
+                  min="1"
+                  max="100"
+                ></mat-slider
+              ></mat-list-item>
+              <mat-divider></mat-divider>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </mat-sidenav>
+      <mat-sidenav-content>
+          <div class = "column">
+        <mat-card class="example-card">
+          <mat-icon *ngIf="opened" (click)="sidenav.toggle()">menu_open</mat-icon>
+          <!-- <button mat-raised-button color="primary" *ngIf="opened" (click)="sidenav.toggle()">
+            Close Side Navigation
+          </button> -->
+          <mat-icon *ngIf="!opened" (click)="sidenav.toggle()">double_arrow</mat-icon>
+          <!-- <button mat-raised-button color="primary" *ngIf="!opened" (click)="sidenav.toggle()">
+              Open Side Navigation
+            </button> -->
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item class="headerFont"
+                ><mat-icon>work</mat-icon
+                ><span>&nbsp;&nbsp;<b> Work Experience </b></span>
+
+              </mat-list-item>
+              <mat-divider></mat-divider>
+              <p *ngIf="user?.workexperience.length <= 0" class="info-text mat-body-1">
+                  No work experience added yet!
+                </p>
+              <span *ngIf= "user?.workexperience.length > 0">
+              <span  *ngFor="let work of user?.workexperience">
+                <mat-list-item class="smallheaderFont"
+                  ><mat-icon>blur_on</mat-icon><span>&nbsp;&nbsp;<b
+                    >{{ work.jobtitle}} / {{work.companyname}}
+                  </b> </span>
+                  </mat-list-item
+                >
+                <mat-list-item class="calenderFont"
+                  ><mat-icon>event</mat-icon> &nbsp;&nbsp; <b>{{work.startdate.slice(0, work.startdate.indexOf(","))}} - {{work.enddate.slice(0, work.enddate.indexOf(","))}}</b>
+                </mat-list-item>
+                <mat-list-item class = "para"
+                  ><span
+                    >{{work.jobdescription}}  <br /></span
+                  ><br />
+                </mat-list-item>
+                <mat-list-item></mat-list-item>
+                <mat-divider></mat-divider>
+              </span>
+              </span>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="example-card">
+            <mat-card-content>
+              <mat-list>
+                <mat-list-item class="headerFont"
+                  ><mat-icon>school</mat-icon
+                  ><span>&nbsp;&nbsp;<b> Education</b></span>
+
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <p *ngIf="user?.education.length <= 0" class="info-text mat-body-1">
+                    No education added yet!
+                  </p>
+                  <span *ngIf="user?.education.length > 0">
+                <span *ngFor="let edu of user?.education">
+                  <mat-list-item class="smallheaderFont"
+                    ><mat-icon>blur_on</mat-icon> <span> &nbsp;&nbsp;<b
+                      >{{edu.degree}} / {{edu.schoolname}}
+                    </b></span></mat-list-item
+                  >
+                  <mat-list-item class="calenderFont"
+                    ><mat-icon>event</mat-icon> &nbsp;&nbsp; <b>{{edu.startdate.slice(0, edu.startdate.indexOf(","))}} - {{edu.enddate.slice(0, edu.enddate.indexOf(","))}}</b>
+                  </mat-list-item>
+                  <mat-list-item class = "para"
+                    ><span
+                      >{{edu.description}}  <br /></span
+                    ><br />
+                  </mat-list-item>
+                  <mat-list-item></mat-list-item>
+                  <mat-divider></mat-divider>
+                </span>
+                </span>
+              </mat-list>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </ng-container>
