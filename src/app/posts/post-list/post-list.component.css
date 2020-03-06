@@ -23,3 +23,30 @@ mat-paginator {
   width: 100%;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
+
+.example-header-image {
+  background-image: url("../../../assets/images.png");
+  background-size: cover;
+}
+
+.example-card {
+  margin-top: 10px;
+  margin-left: 10px;
+  display: inline-grid;
+  max-width: 300px;
+  min-height: 400px;
+}
+
+.matcardimage {
+  height: 200px;
+}
+
+.top-card {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 60px;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,.2), 3px 3px 3px 1px rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}

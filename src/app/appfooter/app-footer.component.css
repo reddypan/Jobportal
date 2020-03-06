@@ -1,0 +1,18 @@
+#navbartextcolor {
+  color: white;
+  text-align: justify;
+}
+#footercolor {
+  background: #0c0e5b;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer {
+  height: 30%;
+  bottom: 0;
+  width: 100%;
+  position: bottom;
+  text-align: center;
+}

@@ -1,5 +1,6 @@
-<mat-card>
+<mat-card class="rpassword">
     <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <h3 class="info-text mat-headline">Add your Work Experience</h3>
     <form [formGroup]="form" (submit)="onSaveWorkExperience()" *ngIf="!isLoading">
       <mat-form-field>
         <input matInput type="text" formControlName="title" placeholder="Job Title">
@@ -31,6 +32,7 @@
         />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('startdate').invalid">Please enter valid start date.</mat-error>
       </mat-form-field>
       <mat-checkbox formControlName = "disabled">I am currently working in this role</mat-checkbox>
       <mat-form-field>
@@ -45,11 +47,12 @@
           />
           <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
           <mat-datepicker #pickerEnd></mat-datepicker>
+          <mat-error *ngIf="form.get('enddate').invalid">Please enter valid end date.</mat-error>
         </mat-form-field>
       <mat-form-field>
           <textarea matInput rows="4" formControlName="content" placeholder="Job Description"></textarea>
           <mat-error *ngIf="form.get('content').invalid">Please enter valid job description.</mat-error>
         </mat-form-field>
-      <button mat-raised-button color="accent" type="submit">Add</button>
+      <button mat-raised-button color="accent" type="submit" class="centerbutton">Add Work</button>
     </form>
   </mat-card>

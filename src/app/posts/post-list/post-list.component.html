@@ -1,31 +1,37 @@
 <mat-spinner *ngIf="isLoading"></mat-spinner>
-<mat-accordion multi="true" *ngIf="posts.length > 0 && !isLoading">
-  <mat-expansion-panel *ngFor="let post of posts">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        {{post.jobTitle}}
-
-      </mat-panel-title>
-      <mat-panel-description>
-        {{post.companyName}}, {{post.location}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <p>{{ post.jobDescription }}</p>
-    <mat-action-row *ngIf="userIsAuthenticated && userId === post.creator">
-        <button mat-button color="accent" [routerLink]="['/viewapplicants', post.id]" routerLinkActive="router-link-active" >View applications</button>
+<mat-card class="top-card" multi="true" *ngIf="posts.length > 0 && !isLoading">
+  <mat-card class="example-card" *ngFor="let post of posts">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title> {{ (post.jobTitle.length>20)? (post.jobTitle | slice:0:20)+'..':(post.jobTitle) }}
+      </mat-card-title>
+      <mat-card-subtitle>{{post.companyName}}, {{post.location}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image class="matcardimage" [src]="post.imagePath" [alt]="post.title" />
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>
+          {{ (post.jobDescription.length>60)? (post.jobDescription | slice:0:60)+'..':(post.jobDescription) }}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions *ngIf="userIsAuthenticated && userId === post.creator">
+      <button mat-button color="accent" [routerLink]="['/viewapplicants', post.id]"
+        routerLinkActive="router-link-active">View applications</button>
       <a mat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
       <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
-    </mat-action-row>
-    <mat-action-row *ngIf="userIsAuthenticated && userId !== post.creator">
-        <a mat-button color="primary" [routerLink]="['/viewjobdetails', post.id]">View more</a>
-        <button mat-button color="warn" [routerLink]="['/applyjob', post.id]">Apply now</button>
-      </mat-action-row>
-      <mat-action-row *ngIf="!userIsAuthenticated">
-          <a mat-button color="primary" [routerLink]="['/auth/login']">View more</a>
-          <button mat-button color="warn" [routerLink]="['/auth/login']">Apply now</button>
-        </mat-action-row>
-  </mat-expansion-panel>
-</mat-accordion>
-<mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
-  *ngIf="posts.length > 0"></mat-paginator>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="userIsAuthenticated && userId !== post.creator">
+      <a mat-button color="primary" [routerLink]="['/viewjobdetails', post.id]">View more</a>
+      <button mat-button color="accent" [routerLink]="['/applyjob', post.id]">Apply now</button>
+    </mat-card-actions>
+    <mat-card-actions *ngIf="!userIsAuthenticated">
+      <a mat-button color="primary" [routerLink]="['/auth/login']">View more</a>
+      <button mat-button color="accent" [routerLink]="['/auth/login']">Apply now</button>
+    </mat-card-actions>
+  </mat-card>
+</mat-card>
+<mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions"
+  (page)="onChangedPage($event)" *ngIf="posts.length > 0"></mat-paginator>
 <p class="info-text mat-body-1" *ngIf="posts.length <= 0 && !isLoading">No posts added yet!</p>

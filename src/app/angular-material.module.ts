@@ -37,7 +37,7 @@ import {
     MatTabsModule,
     MatBadgeModule,
     MatSidenavModule,
-    MatSliderModule
+    MatSliderModule,
   ]
 })
 export class AngularMaterialModule {}

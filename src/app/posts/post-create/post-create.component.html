@@ -1,5 +1,6 @@
-<mat-card>
+<mat-card class="rpassword">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <h3 class="info-text mat-headline">Create new job post</h3>
   <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
     <mat-form-field>
       <input matInput type="text" formControlName="title" placeholder="Job Title">
@@ -24,6 +25,7 @@
           {{ event.viewValue }}
         </mat-option>
       </mat-select>
+      <mat-error *ngIf="form.get('type').invalid">Please enter valid job type.</mat-error>
     </mat-form-field>
      <mat-form-field>
       <input matInput type="text" formControlName="skills" placeholder="Required Skills">
@@ -83,7 +85,8 @@
       />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.get('enddate').invalid">Please enter valid date.</mat-error>
     </mat-form-field>
-    <button mat-raised-button color="accent" type="submit">Save Post</button>
+    <button mat-raised-button color="accent" type="submit" class="centerbutton">Create Post</button>
   </form>
 </mat-card>

@@ -1,5 +1,6 @@
-<mat-card>
+<mat-card class="rpassword">
     <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <h3 class="info-text mat-headline">Add your Education</h3>
     <form [formGroup]="form" (submit)="onSaveEducation()" *ngIf="!isLoading">
       <mat-form-field>
         <input matInput type="text" formControlName="degree" placeholder="Degree">
@@ -9,7 +10,6 @@
         <input matInput type="text" formControlName="schoolname" placeholder="School Name">
         <mat-error *ngIf="form.get('schoolname').invalid">Please enter valid school name.</mat-error>
       </mat-form-field>
-
       <mat-form-field>
         <input
           matInput
@@ -39,6 +39,7 @@
         />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('startdate').invalid">Please enter valid startdate.</mat-error>
       </mat-form-field>
       <mat-checkbox formControlName = "disabled">I am currently studying here.</mat-checkbox>
       <mat-form-field>
@@ -53,12 +54,13 @@
           />
           <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
           <mat-datepicker #pickerEnd></mat-datepicker>
+          <mat-error *ngIf="form.get('enddate').invalid">Please enter valid end date.</mat-error>
         </mat-form-field>
       <mat-form-field>
           <textarea matInput rows="4" formControlName="description" placeholder="Job Description"></textarea>
           <mat-error *ngIf="form.get('description').invalid">Please enter valid description.</mat-error>
         </mat-form-field>
-      <button mat-raised-button color="accent" type="submit">Add</button>
+      <button mat-raised-button color="accent" type="submit" class="centerbutton">Add Education</button>
     </form>
   </mat-card>
 

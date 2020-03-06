@@ -1,5 +1,6 @@
-<mat-card>
+<mat-card class="rpassword">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <h3 class="info-text mat-headline">Register into MyCVOnline</h3><br>
   <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
       <mat-form-field>
           <input matInput name="firstname" ngModel type="text" placeholder="Firstname" #firstname="ngModel" required>
@@ -21,6 +22,6 @@
         <input matInput name="phone" ngModel type="text" placeholder="Phone" #phone="ngModel" required>
         <mat-error *ngIf="phone.invalid">Please enter a valid phone number.</mat-error>
       </mat-form-field>
-    <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Signup</button>
+    <button mat-raised-button color="accent" type="submit" class="centerbutton" *ngIf="!isLoading">Register</button>
   </form>
 </mat-card>

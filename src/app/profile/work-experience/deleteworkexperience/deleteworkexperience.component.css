@@ -7,3 +7,13 @@ textarea {
   text-align: center;
   color: red;
 }
+
+.rpassword {
+  max-width: 700px;
+  margin: 0 auto;
+  display: block;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+  box-shadow: 3px 3px 3px 1px rgba(0,0,0,.2), 3px 3px 3px 1px rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
